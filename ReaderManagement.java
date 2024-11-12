@@ -186,6 +186,7 @@ public class ReaderManagement extends JFrame {
         
         // Gọi phương thức hiển thị dữ liệu ban đầu
         findAllReader();
+	setVisible(true);
     }
     
     private void btnAddReaderActionPerformed(ActionEvent evt)
@@ -307,7 +308,7 @@ public class ReaderManagement extends JFrame {
         
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> new ReaderManagement().setVisible(true));
+        new ReaderManagement();
     }
 
 }
