@@ -36,9 +36,9 @@ public class LibraryDashboard extends JFrame {
 
         // Tạo JLabel để chứa hình ảnh
         JLabel imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(300, 360));  // Chỉ định kích thước cho imageLabel
-        ImageIcon imageIcon = new ImageIcon("src\\Image\\dashboard.jpg");  // Đường dẫn đến ảnh của bạn
-        imageLabel.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(300, 360, Image.SCALE_SMOOTH)));
+        imageLabel.setPreferredSize(new Dimension(500, 560));  // Chỉ định kích thước cho imageLabel
+        ImageIcon imageIcon = new ImageIcon("src\\image\\dashboard.jpg");  // Đường dẫn đến ảnh của bạn
+        imageLabel.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(500, 560, Image.SCALE_SMOOTH)));
         
         // Thêm imageLabel vào giữa leftPanel
         gbc.gridy = 1;
@@ -56,15 +56,9 @@ public class LibraryDashboard extends JFrame {
         JButton btnManageBooks = new JButton("Quản Lý Sách");
         btnManageBooks.setBackground(new Color(202, 170, 205));
         
+        
         JButton btnManageReaders = new JButton("Quản Lý Độc Giả");
         btnManageReaders.setBackground(new Color(203, 150, 46));
-        btnManageReaders.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ReaderManagement().setVisible(true);
-                dispose();  // Ẩn cửa sổ Dashboard hiện tại
-            }
-        });
         
         JButton btnLoanReturn = new JButton("Mượn Trả Sách");
         btnLoanReturn.setBackground(new Color(239, 96, 30));
@@ -83,12 +77,50 @@ public class LibraryDashboard extends JFrame {
         rightPanel.add(btnManageReaders);
         rightPanel.add(btnLoanReturn);
         rightPanel.add(btnStatistics);
+        
+        btnManageBooks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new BookManagement1().setVisible(true);
+                dispose();  // Ẩn cửa sổ Dashboard hiện tại
+            }
+        });
+        
+        btnManageReaders.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ReaderManagement().setVisible(true);
+                dispose();  // Ẩn cửa sổ Dashboard hiện tại
+            }
+        });
+        
+        setVisible(true);
     }
+    
+    private JButton createButtonWithImageAndText(String text, String imagePath, Color bgColor) {
+        JButton button = new JButton(text);
+        button.setBackground(bgColor);
+        button.setFont(new Font("Arial", Font.BOLD, 14));  // Thiết lập font chữ
+
+        // Đặt vị trí của văn bản bên dưới hình ảnh
+        button.setVerticalTextPosition(SwingConstants.BOTTOM);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        // Đặt hình ảnh vào nút
+        try {
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);  // Kích thước hình ảnh
+            button.setIcon(new ImageIcon(scaledImage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Thiết lập kích thước của nút
+        button.setPreferredSize(new Dimension(120, 120));
+        return button;
+        }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LibraryDashboard dashboard = new LibraryDashboard();
-            dashboard.setVisible(true);
-        });
+        new LibraryDashboard();
     }
 }
