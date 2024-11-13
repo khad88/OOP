@@ -3,9 +3,15 @@ package library.management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LibraryDashboard extends JFrame {
     private Container cont;
+    private JButton btnLogOut;
+    private JButton btnManageBooks;
+    private JButton btnManageReaders;
+    private JButton btnLoanReturn;
+    private JButton btnStatistics;
 
     public LibraryDashboard() {
         initializeUI();
@@ -19,6 +25,20 @@ public class LibraryDashboard extends JFrame {
         setBounds(100, 100, 1200, 720);
         setTitle("Library Management Dashboard");
         cont.setBackground(new Color(253, 243, 221));
+
+        // Nút Log Out
+        btnLogOut = new JButton("Đăng xuất");
+        btnLogOut.setBounds(1010, 30, 120, 30); // Kích thước nút lớn hơn cho dễ nhìn
+        btnLogOut.setBackground(new Color(255, 192, 203));
+        btnLogOut.setForeground(Color.darkGray);
+        btnLogOut.setFont(new Font("Arial", Font.BOLD, 16));
+        btnLogOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Ẩn cửa sổ LibraryDashboard hiện tại
+            }
+        });
+        cont.add(btnLogOut);
 
         JPanel leftPanel = createLeftPanel();
         cont.add(leftPanel);
@@ -35,20 +55,34 @@ public class LibraryDashboard extends JFrame {
         leftPanel.setBackground(new Color(253, 243, 221));
         leftPanel.setLayout(new GridBagLayout());
 
+        // Tạo logo
+        JLabel logoLabel = new JLabel();
+        ImageIcon logoIcon = new ImageIcon("src\\image\\result_logo_ptit1.png");
+
+        logoLabel.setIcon(logoIcon);
+
+        // Tạo tiêu đề
         JLabel titleLabel = new JLabel("QUẢN LÝ THƯ VIỆN", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+        // Tạo JPanel chứa cả logo và tiêu đề
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(new Color(253, 243, 221));
+        titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        titlePanel.add(logoLabel);
+        titlePanel.add(titleLabel);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.NORTH;
-        leftPanel.add(titleLabel, gbc);
+        leftPanel.add(titlePanel, gbc);
 
         JLabel imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(500, 560));
-        ImageIcon imageIcon = new ImageIcon("src\\image\\dashboard.jpg");
-        imageLabel.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(500, 560, Image.SCALE_SMOOTH)));
+        imageLabel.setPreferredSize(new Dimension(400, 442));
+        ImageIcon imageIcon = new ImageIcon("src\\image\\result_dashboard4.png");
+        imageLabel.setIcon(imageIcon);
 
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -63,10 +97,10 @@ public class LibraryDashboard extends JFrame {
         rightPanel.setBackground(new Color(253, 243, 221));
         rightPanel.setLayout(new GridLayout(2, 2, 20, 20));
 
-        JButton btnManageBooks = createButtonWithAction("Quản Lý Sách", new Color(202, 170, 205), e -> openBookManagement());
-        JButton btnManageReaders = createButtonWithAction("Quản Lý Độc Giả", new Color(203, 150, 46), e -> openReaderManagement());
-        JButton btnLoanReturn = createButton("Mượn Trả Sách", new Color(239, 96, 30));
-        JButton btnStatistics = createButton("Thống Kê", new Color(255, 216, 63));
+        btnManageBooks = createButtonWithAction("Quản Lý Sách", new Color(202, 170, 205), "src\\image\\book_icon.png", e -> openBookManagement());
+        btnManageReaders = createButtonWithAction("Quản Lý Độc Giả", new Color(203, 150, 46), "src\\image\\book_icon.png", e -> openReaderManagement());
+        btnLoanReturn = createButtonWithAction("Mượn Trả Sách", new Color(239, 96, 30), "src\\image\\book_icon.png", e -> openBookManagement());
+        btnStatistics = createButtonWithAction("Thống Kê", new Color(255, 216, 63), "src\\image\\book_icon.png", e -> openBookManagement());
 
         rightPanel.add(btnManageBooks);
         rightPanel.add(btnManageReaders);
@@ -76,16 +110,42 @@ public class LibraryDashboard extends JFrame {
         return rightPanel;
     }
 
-    private JButton createButton(String text, Color bgColor) {
-        JButton button = new JButton(text);
+    private JButton createButtonWithAction(String text, Color bgColor, String imagePath, ActionListener actionListener) {
+        // Tạo button
+        JButton button = new JButton();
         button.setBackground(bgColor);
-        button.setFont(new Font("Arial", Font.BOLD, 14));
-        return button;
-    }
+        button.setFont(new Font("Arial", Font.BOLD, 20));
 
-    private JButton createButtonWithAction(String text, Color bgColor, ActionListener actionListener) {
-        JButton button = createButton(text, bgColor);
+        // Tạo panel chứa icon và text
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout()); // Sử dụng GridBagLayout
+        panel.setBackground(bgColor); // Đảm bảo nền của panel tương thích với button
+
+        // Tạo icon
+        ImageIcon icon = new ImageIcon(imagePath);
+        icon = new ImageIcon(icon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+        JLabel iconLabel = new JLabel(icon);
+
+        // Tạo text
+        JLabel textLabel = new JLabel(text, SwingConstants.CENTER);
+        textLabel.setForeground(Color.BLACK);
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        // Đặt icon lên trên và text dưới icon
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(iconLabel, gbc); // Icon ở trên
+
+        gbc.gridy = 1;
+        panel.add(textLabel, gbc); // Text ở dưới icon
+
+        // Thêm panel vào button
+        button.add(panel);
+
+        // Thêm hành động cho nút
         button.addActionListener(actionListener);
+
         return button;
     }
 
@@ -98,8 +158,12 @@ public class LibraryDashboard extends JFrame {
         new ReaderManagement().setVisible(true);
         dispose();
     }
-
-    public static void main(String[] args) {
-        new LibraryDashboard();
+    
+    private void openStatistic(){
+        dispose();
+    }
+    
+    private void openLoanReturn(){
+        dispose();
     }
 }
