@@ -7,7 +7,6 @@ public class Reader
 	private String name;
 	private String identityCard;
 	private String phoneNo;
-	private String cardIssueDate;
 	private String job;
 	
 	public Reader() 
@@ -15,15 +14,13 @@ public class Reader
 
 	}
 
-	public Reader(int readerId, String surname, String name, String identityCard, String phoneNo,
-			String cardIssueDate, String job)
+	public Reader(int readerId, String surname, String name, String identityCard, String phoneNo, String job)
 	{
 		this.readerId = readerId;
 		this.surname = surname;
 		this.name = name;
 		this.identityCard = identityCard;
 		this.phoneNo = phoneNo;
-		this.cardIssueDate = cardIssueDate;
 		this.job = job;
 	}
 
@@ -76,18 +73,7 @@ public class Reader
 	{
 		this.phoneNo = phoneNo;
 	}
-
-	public String getCardIssueDate()
-	{
-		return cardIssueDate;
-	}
-
-	public void setCardIssueDate(String cardIssueDate) 
-	{
-		this.cardIssueDate = cardIssueDate;
-	}
 	
-
 	public String getJob() 
 	{
 		return job;

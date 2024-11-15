@@ -120,7 +120,7 @@ public class LoanModify
 			stmt.setInt(1, ReaderId);
 			stmt.execute();
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
+			if(rs.next())
 			{
 				reader.setName(rs.getString(1));
 			}
@@ -151,7 +151,7 @@ public class LoanModify
 			stmt.setInt(1, BookId);
 			stmt.execute();
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
+			if(rs.next())
 			{
 				book.setBookName(rs.getString(1));
 			}
