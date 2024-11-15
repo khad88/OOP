@@ -87,8 +87,4 @@ public class ThongKe extends JFrame {
 		lblStatisticLoan.setText("Sách đang cho mượn: "+statisticModify.getStatisticLoan());
 		lblStatisticPunish.setText("Sách bị trễ hạn trả: "+statisticModify.getStatisticPunish());
     }
-
-    public static void main(String[] args) {
-        new ThongKe();
-    }
 }
