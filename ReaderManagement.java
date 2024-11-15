@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.*;
 import javax.swing.table.*;
-import com.toedter.calendar.JDateChooser;
 
 public class ReaderManagement extends JFrame {
     private Connection conn;
@@ -30,6 +29,8 @@ public class ReaderManagement extends JFrame {
         // Nút Quay lại
         btnBack = new JButton("Quay lại");
         btnBack.setBounds(10, 10, 100, 30);
+        
+        btnBack.setBackground(new Color(255, 234, 197));
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,13 +60,15 @@ public class ReaderManagement extends JFrame {
         
         // Tạo JPanel làm ô vuông
         JPanel pnlTitleBox = new JPanel();
-        pnlTitleBox.setBounds(700, 0, 200, 40); // Xác định kích thước vuông
+        pnlTitleBox.setBounds(700, 0, 250, 40); // Xác định kích thước vuông
         pnlTitleBox.setLayout(new BorderLayout());  // Sử dụng BorderLayout để dễ dàng căn giữa nội dung
-        pnlTitleBox.setBackground(new Color(255, 234, 197));
+        pnlTitleBox.setBackground(new Color(243,77,110));
+        
 
         // Tạo JLabel cho tiêu đề "Quản lý độc giả"
-        JLabel lblTitle = new JLabel("Quản lý độc giả", SwingConstants.CENTER);
+        JLabel lblTitle = new JLabel("QUẢN LÝ ĐỘC GIẢ", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Serif", Font.BOLD, 24));
+        lblTitle.setForeground(new Color(255, 255, 255)); 
 
         // Thêm JLabel vào JPanel
         pnlTitleBox.add(lblTitle, BorderLayout.CENTER);
@@ -76,12 +79,12 @@ public class ReaderManagement extends JFrame {
         // Hiển thị hình ảnh bên phải
         JLabel imageLabel = new JLabel();
         try {
-            ImageIcon imageIcon = new ImageIcon("src\\Image\\quanlydocgia.jpg");
+            ImageIcon imageIcon = new ImageIcon("src\\images\\quanlydocgia2.jpg");
             imageLabel.setIcon(imageIcon);
         } catch (Exception e) {
             System.out.println("Không thể tải hình ảnh: " + e.getMessage());
         }
-        imageLabel.setBounds(520, 50, 606, 200);
+        imageLabel.setBounds(520, 50, 600, 200);
         pnlReaderManagement.add(imageLabel);
 
         // Tạo các nhãn và trường nhập liệu cho thông tin độc giả
@@ -169,15 +172,7 @@ public class ReaderManagement extends JFrame {
         btnUpdateReader.setBackground(buttonColor);
         btnSearchReader.setBackground(buttonColor);
         
-        btnBack.setBackground(new Color(255, 234, 197));
         
-        //Mau text field
-        Color textFieldColor = new Color(176,166,149);
-        tfIdentityCard.setBackground(textFieldColor);
-        tfPhoneNumber.setBackground(textFieldColor);
-        tfReaderName.setBackground(textFieldColor);
-        tfSurname.setBackground(textFieldColor);
-        tfSearchReader.setBackground(textFieldColor);
         
         // Button Group
         gr = new ButtonGroup();
@@ -186,129 +181,134 @@ public class ReaderManagement extends JFrame {
         
         // Gọi phương thức hiển thị dữ liệu ban đầu
         findAllReader();
-	setVisible(true);
+        setVisible(true);
     }
     
     private void btnAddReaderActionPerformed(ActionEvent evt)
+    {
+	Reader reader = new Reader();
+	if(tfReaderName.getText().length()==0  || tfIdentityCard.getText().length()==0 || tfPhoneNumber.getText().length()==0)
 	{
-		Reader reader = new Reader();
-		if(tfReaderName.getText().length()==0  || tfIdentityCard.getText().length()==0 || tfPhoneNumber.getText().length()==0)
+		JOptionPane.showInternalMessageDialog(cont,"Vui lòng điền đầy đủ thông tin");
+	} 
+	else
+	{
+		if(tfSurname.getText().length()==0)
 		{
-			JOptionPane.showInternalMessageDialog(cont,"Vui lòng điền đầy đủ thông tin");
-		} 
+			reader.setSurname(null);
+		}
 		else
 		{
-			if(tfSurname.getText().length()==0)
-			{
-				reader.setSurname(null);
-			}
-			else
-			{
-				reader.setSurname(tfSurname.getText());
-			}
-			reader.setName(tfReaderName.getText());
-			reader.setIdentityCard(tfIdentityCard.getText());
-			reader.setPhoneNo(tfPhoneNumber.getText());
-			if(rdoLecturer.isSelected())
-			{
-				reader.setJob(rdoLecturer.getText());
-			} else if(rdoStudent.isSelected())
-			{
-				reader.setJob(rdoStudent.getText());
-			}
-			readerModify.addReader(reader);
-			findAllReader();
+			reader.setSurname(tfSurname.getText());
 		}
+		reader.setName(tfReaderName.getText());
+		reader.setIdentityCard(tfIdentityCard.getText());
+		reader.setPhoneNo(tfPhoneNumber.getText());
+		if(rdoLecturer.isSelected())
+		{
+			reader.setJob(rdoLecturer.getText());
+		} else if(rdoStudent.isSelected())
+		{
+			reader.setJob(rdoStudent.getText());
+		}
+		readerModify.addReader(reader);
+		findAllReader();
+	}
 
-	}
+    }
 	
-	private void btnUpdateReaderActionPerformed(ActionEvent evt)
+    private void btnUpdateReaderActionPerformed(ActionEvent evt)
+    {
+	Reader reader = new Reader();
+        if(tfReaderName.getText().length()==0  || tfIdentityCard.getText().length()==0 || tfPhoneNumber.getText().length()==0)
 	{
-		Reader reader = new Reader();
-		if(tfReaderName.getText().length()==0  || tfIdentityCard.getText().length()==0 || tfPhoneNumber.getText().length()==0)
+		JOptionPane.showInternalMessageDialog(cont,"Vui lòng điền đầy đủ thông tin");
+	} 
+	else
+	{
+		if(tfSurname.getText().length()==0)
 		{
-			JOptionPane.showInternalMessageDialog(cont,"Vui lòng điền đầy đủ thông tin");
-		} 
+			reader.setSurname(null);
+		}
 		else
 		{
-			if(tfSurname.getText().length()==0)
-			{
-				reader.setSurname(null);
-			}
-			else
-			{
-				reader.setSurname(tfSurname.getText());
-			}
-			reader.setName(tfReaderName.getText());
-			reader.setIdentityCard(tfIdentityCard.getText());
-			reader.setPhoneNo(tfPhoneNumber.getText());
-			if(rdoLecturer.isSelected())
-			{
-				reader.setJob(rdoLecturer.getText());
-			} else if(rdoStudent.isSelected())
-			{
-				reader.setJob(rdoStudent.getText());
-			}
-			reader.setReaderId(Integer.parseInt(String.valueOf(table.getValueAt(table.getSelectedRow(), 0))));
-			readerModify.updateReader(reader);
-			findAllReader();
+			reader.setSurname(tfSurname.getText());
 		}
-		
+		reader.setName(tfReaderName.getText());
+		reader.setIdentityCard(tfIdentityCard.getText());
+		reader.setPhoneNo(tfPhoneNumber.getText());
+		if(rdoLecturer.isSelected())
+		{
+			reader.setJob(rdoLecturer.getText());
+		} else if(rdoStudent.isSelected())
+		{
+			reader.setJob(rdoStudent.getText());
+		}
+		reader.setReaderId(Integer.parseInt(String.valueOf(table.getValueAt(table.getSelectedRow(), 0))));
+       		readerModify.updateReader(reader);
+		findAllReader();
 	}
+		
+    }
 	
-	private void btnDeleteReaderActionPerformed(ActionEvent evt)
+    private void btnDeleteReaderActionPerformed(ActionEvent evt)
+    {
+	try
 	{
-		try
-		{
-			readerModify.deleteReader(Integer.parseInt(String.valueOf(table.getValueAt(table.getSelectedRow(), 0))));
-			findAllReader();
-		} catch(IndexOutOfBoundsException e)
-		{
-			JOptionPane.showInternalMessageDialog(cont,"Vui lòng chọn hàng cần xóa");
-		}
+		readerModify.deleteReader(Integer.parseInt(String.valueOf(table.getValueAt(table.getSelectedRow(), 0))));
+		findAllReader();
+	} catch(IndexOutOfBoundsException e)
+	{
+		JOptionPane.showInternalMessageDialog(cont,"Vui lòng chọn hàng cần xóa");
 	}
+    }
 	
-	private void btnResetReaderActionPerformed(ActionEvent evt)
-	{
-		tfSurname.setText(null);
-		tfReaderName.setText(null);
-		tfIdentityCard.setText(null);
-		tfPhoneNumber.setText(null);
-		rdoStudent.setSelected(true);
+    private void btnResetReaderActionPerformed(ActionEvent evt)
+    {
+	tfSurname.setText(null);
+	tfReaderName.setText(null);
+	tfIdentityCard.setText(null);
+	tfPhoneNumber.setText(null);
+	rdoStudent.setSelected(true);
 		
-	}
+    }
         
-        public void findAllReader()
-	{
-		Vector<Reader> readerList = null;
-		if(btnSearchReader.getText().equals(""))
-		{
-			readerList = readerModify.getReaderList();
-		} else
-		{
-			readerList = readerModify.findReaderByAll(tfSearchReader.getText());
-		}
-		String[] columnNames = {"Mã độc giả", "Họ đệm", 
-				"Tên", "CMND", "SĐT", "Ngày cấp thẻ", "Chức vụ"};
-		tblModel = new DefaultTableModel();
-		tblModel.setColumnIdentifiers(columnNames);
-		table.setModel(tblModel);
-		for(Reader reader: readerList)
-		{
-			tblModel.addRow(new Object[] {reader.getReaderId(), reader.getSurname(), reader.getName(), reader.getIdentityCard(), reader.getPhoneNo(), reader.getCardIssueDate(), reader.getJob()});
-		}
-		
-		
-	}
-        
-        private void btnSearchReaderActionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void btnSearchReaderActionPerformed(ActionEvent e) {
+        String sql;
+        String parameter;
+        if(tfSearchReader.getText().equals(""))
+        {
+            findAllReader();
+        } 
+        else
+        {
+            sql = "call sp_findByAllBook(?)";
+            parameter = tfSearchReader.getText();
+            findAllReader();
         }
+    }
         
-        
-
-    public static void main(String[] args) {
-        new ReaderManagement();
+    public void findAllReader()
+    {
+	Vector<Reader> readerList = null;
+        if(btnSearchReader.getText().equals(""))
+	{
+		readerList = readerModify.getReaderList();
+	} else
+	{
+		readerList = readerModify.findReaderByAll(tfSearchReader.getText());
+	}
+	String[] columnNames = {"Mã độc giả", "Họ đệm", 
+			"Tên", "CMND", "SĐT", "Chức vụ"};
+	tblModel = new DefaultTableModel();
+	tblModel.setColumnIdentifiers(columnNames);
+	table.setModel(tblModel);
+	for(Reader reader: readerList)
+	{
+		tblModel.addRow(new Object[] {reader.getReaderId(), reader.getSurname(), reader.getName(), reader.getIdentityCard(), reader.getPhoneNo(), reader.getJob()});
+	}
+		
+		
     }
 
 }
