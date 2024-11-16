@@ -6,7 +6,7 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import javax.swing.table.*;
 
-public class ThongKe extends JFrame {
+public class StatisticUI extends JFrame {
 
     private StatisticModify statisticModify = new StatisticModify();
     private JPanel pnlStatistical; 
@@ -17,7 +17,7 @@ public class ThongKe extends JFrame {
     private JLabel jLabelBackground;
     private JButton btnBack;
 
-    public ThongKe(){
+    public StatisticUI(){
         setTitle("Thống Kê");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1200, 720);
@@ -87,4 +87,5 @@ public class ThongKe extends JFrame {
 		lblStatisticLoan.setText("Sách đang cho mượn: "+statisticModify.getStatisticLoan());
 		lblStatisticPunish.setText("Sách bị trễ hạn trả: "+statisticModify.getStatisticPunish());
     }
+
 }
