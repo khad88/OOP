@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.*;
 import javax.swing.table.*;
 
-public class ReaderManagement extends JFrame {
+public class ReaderManagementUI extends JFrame {
     private Connection conn;
     private Container cont;
     private ButtonGroup gr;
@@ -20,7 +20,7 @@ public class ReaderManagement extends JFrame {
 
     private ReaderModify readerModify = new ReaderModify();
 
-    public ReaderManagement() {
+    public ReaderManagementUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1200, 720);
         cont = this.getContentPane();
