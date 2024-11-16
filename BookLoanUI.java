@@ -10,7 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-public class BookLoanUI1 extends JFrame {
+public class BookLoanUI extends JFrame {
     
     LoanModify loanModify = new LoanModify();
     PunishmentModify punishmentModify = new PunishmentModify();
@@ -26,7 +26,7 @@ public class BookLoanUI1 extends JFrame {
     private JDateChooser dc;
     private DateFormat df;
     
-    public BookLoanUI1() {
+    public BookLoanUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1200, 720);
         cont = this.getContentPane();
