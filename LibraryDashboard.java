@@ -150,22 +150,22 @@ public class LibraryDashboard extends JFrame {
     }
 
     private void openBookManagement() {
-        new BookManagement1();
+        new BookManagementUI();
         dispose();
     }
 
     private void openReaderManagement() {
-        new ReaderManagement();
+        new ReaderManagementUI();
         dispose();
     }
     
     private void openStatistics(){
-        new ThongKe();
+        new StatisticUI();
         dispose();
     }
     
     private void openLoanReturn(){
-        new BookLoanUI1();
+        new BookLoanUI();
         dispose();
     }
 }
