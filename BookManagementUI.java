@@ -1,37 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package library.management;
 
-/**
- *
- * @author ADMIN
- */
+
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.border.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 
 import java.awt.event.*;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.Vector;
-import javax.swing.*;
 import javax.swing.table.*;
 
 
-public class BookManagement1 extends javax.swing.JFrame {
+public class BookManagementUI extends javax.swing.JFrame {
     BookModify bookModify = new BookModify();
     //Dashboard dashboard = new Dashboard(); 
     private Connection conn;
@@ -51,7 +33,7 @@ public class BookManagement1 extends javax.swing.JFrame {
     private JPanel pnlBookManagement; 
  
     
-    public BookManagement1() {
+    public BookManagementUI() {
         cont = this.getContentPane();
 	cont.setLayout(null);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -344,7 +326,7 @@ public class BookManagement1 extends javax.swing.JFrame {
     }
     //private void btnBackToDashboardActionPerformed(ActionEvent evt) {
     //    dashboard.setVisible(true);  // Show the Dashboard
-        //this.dispose();  // Close the current BookManagement1 window
+        //this.dispose();  // Close the current BookManagementUI window
    // }
     private void btnResetBookActionPerformed(ActionEvent evt)
     {
