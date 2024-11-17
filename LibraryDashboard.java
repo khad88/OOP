@@ -165,7 +165,7 @@ public class LibraryDashboard extends JFrame {
     }
     
     private void openLoanReturn(){
-        new BookLoanUI();
+        new LoanUI();
         dispose();
     }
 }
