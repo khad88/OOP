@@ -35,6 +35,7 @@ public class LibraryDashboard extends JFrame {
         btnLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                new LoginFrame().setVisible(true);
                 dispose(); // Ẩn cửa sổ LibraryDashboard hiện tại
             }
         });
