@@ -347,7 +347,7 @@ public class BookManagementUI extends javax.swing.JFrame {
         {
             bookModify.deleteBook(Integer.parseInt(String.valueOf(table.getValueAt(table.getSelectedRow(), 0))));
             findAllBook();
-	} catch(IndexOutOfBoundsException e)
+	}catch(IndexOutOfBoundsException e)
 	{
             JOptionPane.showInternalMessageDialog(cont,"Vui lòng chọn hàng cần xóa");
 	}

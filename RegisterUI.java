@@ -131,8 +131,9 @@ public class RegisterUI extends JFrame {
         leftPanel.add(btnRegister);
 
         // Nút "Đã có tài khoản? Đăng nhập"
-        btnLogin = new JButton("Đã có tài khoản? Đăng nhập");
+        btnLogin = new JButton("Đã có tài khoản? Đăng nhập ngay");
         btnLogin.setFont(new Font("Arial", Font.BOLD, 24));
+        btnLogin.setForeground(Color.RED);
         btnLogin.setBounds(80, 610, 450, 50);
         btnLogin.setContentAreaFilled(false);
         btnLogin.setBorderPainted(false);

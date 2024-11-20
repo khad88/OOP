@@ -111,6 +111,7 @@ public class LoginUI extends JFrame {
         // Nút "Chưa có tài khoản? Đăng ký ngay"
         btnRegister = new JButton("Chưa có tài khoản? Đăng ký ngay");
         btnRegister.setFont(new Font("Arial", Font.BOLD, 24));
+        btnRegister.setForeground(Color.RED);
         btnRegister.setBounds(80, 600, 450, 50);
         btnRegister.setContentAreaFilled(false);
         btnRegister.setBorderPainted(false);
